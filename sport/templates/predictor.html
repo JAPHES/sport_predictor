@@ -286,6 +286,41 @@
             line-height: 1.6;
         }
 
+        .explanation-grid {
+            display: grid;
+            gap: 14px;
+            margin-top: 24px;
+        }
+
+        .explanation-card {
+            padding: 16px;
+            border: 1px solid #d9e2ec;
+            border-radius: 8px;
+            background: #f8fafc;
+        }
+
+        .explanation-card h3 {
+            margin: 0 0 8px;
+            color: #172026;
+            font-size: 16px;
+            line-height: 1.25;
+        }
+
+        .explanation-card p {
+            margin: 0;
+            color: #52616b;
+            line-height: 1.55;
+        }
+
+        .explanation-card.motivation {
+            border-color: #99f6e4;
+            background: #ecfdf5;
+        }
+
+        .explanation-card.motivation h3 {
+            color: #0f766e;
+        }
+
         .empty-state {
             color: #52616b;
             line-height: 1.65;
@@ -484,7 +519,24 @@
                 {% if prediction %}
                     <p class="prediction-label">Recommended game for {{ person_name }}</p>
                     <span class="prediction">{{ prediction }}</span>
-                    <p class="result-note">Use this result as a learning recommendation based on the trained model inputs.</p>
+                    <p class="result-note">This explanation is generated after the model prediction using the learner details you entered.</p>
+
+                    <div class="explanation-grid">
+                        <article class="explanation-card">
+                            <h3>Why this sport was predicted</h3>
+                            <p>{{ explanation.why }}</p>
+                        </article>
+
+                        <article class="explanation-card">
+                            <h3>How it may suit the learner</h3>
+                            <p>{{ explanation.fit }}</p>
+                        </article>
+
+                        <article class="explanation-card motivation">
+                            <h3>Recommendation message</h3>
+                            <p>{{ explanation.motivation }}</p>
+                        </article>
+                    </div>
                 {% else %}
                     <div class="empty-state">
                         <strong>No prediction yet</strong>
