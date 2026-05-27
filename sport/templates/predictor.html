@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sports Predictor</title>
+    <title>Sports Predictor | Prediction</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,192 +13,458 @@
             margin: 0;
             min-height: 100vh;
             font-family: Arial, sans-serif;
-            color: #1f2933;
-            background: #eef2f7;
+            color: #172026;
+            background: #f5f7fa;
         }
 
-        main {
-            width: min(920px, calc(100% - 32px));
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+            background: rgba(15, 23, 42, 0.94);
+            backdrop-filter: blur(12px);
+        }
+
+        .nav {
+            width: min(1120px, calc(100% - 32px));
+            min-height: 68px;
             margin: 0 auto;
-            padding: 40px 0;
-        }
-
-        .topbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 16px;
-            margin-bottom: 24px;
+            gap: 24px;
+            color: #ffffff;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border-radius: 8px;
+            color: #082f2a;
+            background: #5eead4;
+            font-weight: 900;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: #dbeafe;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        main {
+            width: min(1120px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 48px 0 70px;
+        }
+
+        .page-intro {
+            max-width: 760px;
+            margin-bottom: 30px;
+        }
+
+        .eyebrow {
+            margin: 0 0 10px;
+            color: #0f766e;
+            font-size: 14px;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
         }
 
         h1 {
             margin: 0;
-            font-size: clamp(28px, 4vw, 44px);
-            line-height: 1.1;
+            font-size: clamp(34px, 5vw, 58px);
+            line-height: 1.06;
         }
 
-        a {
-            color: #0f766e;
-            font-weight: 700;
-            text-decoration: none;
+        .intro-copy {
+            max-width: 660px;
+            margin: 16px 0 0;
+            color: #52616b;
+            font-size: 17px;
+            line-height: 1.65;
         }
 
-        .panel {
+        .predictor-shell {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
-            gap: 24px;
-            align-items: start;
+            grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+            gap: 22px;
+            align-items: stretch;
         }
 
-        form,
-        .result {
+        .form-panel,
+        .result-panel {
             border: 1px solid #d9e2ec;
             border-radius: 8px;
             background: #ffffff;
-            padding: 24px;
-            box-shadow: 0 16px 30px rgba(15, 23, 42, 0.08);
+            box-shadow: 0 18px 38px rgba(15, 23, 42, 0.10);
+        }
+
+        .form-panel {
+            padding: 28px;
+        }
+
+        .panel-heading {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5edf3;
+        }
+
+        .panel-heading h2 {
+            margin: 0;
+            font-size: 24px;
+            line-height: 1.2;
+        }
+
+        .badge {
+            flex: 0 0 auto;
+            display: inline-flex;
+            min-height: 30px;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10px;
+            border-radius: 999px;
+            color: #0f766e;
+            background: #ccfbf1;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
         }
 
         label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 700;
+            color: #1f2933;
+            font-weight: 800;
         }
 
         input,
         select {
             width: 100%;
-            height: 44px;
+            height: 48px;
             border: 1px solid #bcccdc;
             border-radius: 6px;
-            padding: 0 12px;
-            font-size: 16px;
-            color: #1f2933;
+            padding: 0 13px;
+            color: #172026;
             background: #ffffff;
+            font-size: 16px;
+            outline: none;
         }
 
-        .field {
-            margin-bottom: 18px;
+        input:focus,
+        select:focus {
+            border-color: #0f766e;
+            box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.16);
+        }
+
+        .hint {
+            margin: 7px 0 0;
+            color: #697586;
+            font-size: 13px;
+            line-height: 1.4;
         }
 
         .error {
-            margin: 6px 0 0;
+            margin: 7px 0 0;
             color: #b42318;
             font-size: 14px;
+            font-weight: 700;
+            line-height: 1.4;
         }
 
         button {
             width: 100%;
-            height: 46px;
+            min-height: 50px;
+            margin-top: 24px;
             border: 0;
             border-radius: 6px;
-            color: #ffffff;
-            background: #0f766e;
+            color: #082f2a;
+            background: #5eead4;
             font-size: 16px;
-            font-weight: 700;
+            font-weight: 900;
             cursor: pointer;
         }
 
         button:hover {
-            background: #115e59;
+            background: #2dd4bf;
         }
 
-        .result {
-            min-height: 184px;
+        .result-panel {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
 
-        .result h2 {
-            margin: 0 0 12px;
-            font-size: 22px;
+        .result-top {
+            padding: 28px;
+            color: #ffffff;
+            background: #172026;
         }
 
-        .prediction {
-            display: inline-block;
-            margin-top: 8px;
-            color: #0f766e;
-            font-size: 32px;
+        .result-top p {
+            margin: 0;
+            color: #f59e0b;
+            font-size: 14px;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .result-top h2 {
+            margin: 12px 0 0;
+            font-size: 28px;
+            line-height: 1.16;
+        }
+
+        .result-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 260px;
+            padding: 28px;
+        }
+
+        .prediction-label {
+            margin: 0 0 10px;
+            color: #52616b;
             font-weight: 800;
         }
 
-        .muted {
-            margin: 0;
-            color: #52616b;
-            line-height: 1.5;
+        .prediction {
+            display: block;
+            color: #0f766e;
+            font-size: clamp(38px, 6vw, 58px);
+            font-weight: 900;
+            line-height: 1;
         }
 
-        @media (max-width: 760px) {
-            .topbar {
+        .result-note {
+            margin: 18px 0 0;
+            color: #52616b;
+            line-height: 1.6;
+        }
+
+        .empty-state {
+            color: #52616b;
+            line-height: 1.65;
+        }
+
+        .empty-state strong {
+            display: block;
+            margin-bottom: 10px;
+            color: #172026;
+            font-size: 20px;
+        }
+
+        .info-list {
+            margin: 24px 0 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            gap: 10px;
+        }
+
+        .info-list li {
+            display: flex;
+            gap: 10px;
+            color: #52616b;
+            line-height: 1.45;
+        }
+
+        .info-list span {
+            flex: 0 0 auto;
+            width: 22px;
+            height: 22px;
+            display: grid;
+            place-items: center;
+            border-radius: 6px;
+            color: #ffffff;
+            background: #0f766e;
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        @media (max-width: 860px) {
+            .nav {
+                min-height: auto;
+                padding: 16px 0;
                 align-items: flex-start;
                 flex-direction: column;
             }
 
-            .panel {
+            .nav-links {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .predictor-shell,
+            .form-grid {
                 grid-template-columns: 1fr;
+            }
+
+            main {
+                padding-top: 36px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .nav-links {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .form-panel,
+            .result-top,
+            .result-body {
+                padding: 22px;
+            }
+
+            .panel-heading {
+                flex-direction: column;
             }
         }
     </style>
 </head>
 <body>
-<main>
-    <div class="topbar">
-        <h1>Sports Predictor</h1>
-        <a href="{% url 'index' %}">Home</a>
-    </div>
+<header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="{% url 'index' %}">
+            <span class="brand-mark">SP</span>
+            <span>Sports Predictor</span>
+        </a>
 
-    <div class="panel">
-        <form method="post" action="{% url 'predictor' %}">
+        <div class="nav-links">
+            <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'predictor' %}">Predictor</a>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="page-intro">
+        <p class="eyebrow">Prediction workspace</p>
+        <h1>Find a suitable sport recommendation.</h1>
+        <p class="intro-copy">
+            Enter learner details below. The model accepts ages from 13 to 19 and returns one recommended sport.
+        </p>
+    </section>
+
+    <section class="predictor-shell">
+        <form class="form-panel" method="post" action="{% url 'predictor' %}">
             {% csrf_token %}
 
-            <div class="field">
-                <label for="name">Name</label>
-                <input id="name" name="name" type="text" value="{{ form.name }}" autocomplete="name" required>
-                {% if errors.name %}
-                    <p class="error">{{ errors.name }}</p>
-                {% endif %}
+            <div class="panel-heading">
+                <h2>Learner details</h2>
+                <span class="badge">ML model</span>
             </div>
 
-            <div class="field">
-                <label for="age">Age</label>
-                <input id="age" name="age" type="number" min="13" max="19" value="{{ form.age }}" required>
-                {% if errors.age %}
-                    <p class="error">{{ errors.age }}</p>
-                {% endif %}
-            </div>
+            <div class="form-grid">
+                <div class="field full">
+                    <label for="name">Name</label>
+                    <input id="name" name="name" type="text" value="{{ form.name }}" autocomplete="name" placeholder="Enter learner name" required>
+                    {% if errors.name %}
+                        <p class="error">{{ errors.name }}</p>
+                    {% endif %}
+                </div>
 
-            <div class="field">
-                <label for="height">Height</label>
-                <input id="height" name="height" type="number" min="1" step="0.1" value="{{ form.height }}" required>
-                {% if errors.height %}
-                    <p class="error">{{ errors.height }}</p>
-                {% endif %}
-            </div>
+                <div class="field">
+                    <label for="age">Age</label>
+                    <input id="age" name="age" type="number" min="13" max="19" value="{{ form.age }}" placeholder="13 - 19" required>
+                    <p class="hint">Allowed range: 13 to 19.</p>
+                    {% if errors.age %}
+                        <p class="error">{{ errors.age }}</p>
+                    {% endif %}
+                </div>
 
-            <div class="field">
-                <label for="gender">Gender</label>
-                <select id="gender" name="gender" required>
-                    <option value="">Select gender</option>
-                    {% for value, label in gender_choices %}
-                        <option value="{{ value }}" {% if form.gender == value %}selected{% endif %}>{{ label }}</option>
-                    {% endfor %}
-                </select>
-                {% if errors.gender %}
-                    <p class="error">{{ errors.gender }}</p>
-                {% endif %}
+                <div class="field">
+                    <label for="height">Height</label>
+                    <input id="height" name="height" type="number" min="1" step="0.1" value="{{ form.height }}" placeholder="Example: 5.4" required>
+                    <p class="hint">Use the same height format used during training.</p>
+                    {% if errors.height %}
+                        <p class="error">{{ errors.height }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="field full">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender" required>
+                        <option value="">Select gender</option>
+                        {% for value, label in gender_choices %}
+                            <option value="{{ value }}" {% if form.gender == value %}selected{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                    {% if errors.gender %}
+                        <p class="error">{{ errors.gender }}</p>
+                    {% endif %}
+                </div>
             </div>
 
             <button type="submit">Predict sport</button>
         </form>
 
-        <section class="result">
-            {% if prediction %}
-                <h2>Recommended game for {{ person_name }}</h2>
-                <span class="prediction">{{ prediction }}</span>
-            {% else %}
-                <h2>Prediction</h2>
-                <p class="muted">Your result will appear here after submitting the form.</p>
-            {% endif %}
-        </section>
-    </div>
+        <aside class="result-panel" aria-live="polite">
+            <div class="result-top">
+                <p>Model output</p>
+                <h2>Your recommendation appears here.</h2>
+            </div>
+
+            <div class="result-body">
+                {% if prediction %}
+                    <p class="prediction-label">Recommended game for {{ person_name }}</p>
+                    <span class="prediction">{{ prediction }}</span>
+                    <p class="result-note">Use this result as a learning recommendation based on the trained model inputs.</p>
+                {% else %}
+                    <div class="empty-state">
+                        <strong>No prediction yet</strong>
+                        Submit the form to receive a sport recommendation.
+                    </div>
+
+                    <ul class="info-list">
+                        <li><span>1</span>Fill in the learner details.</li>
+                        <li><span>2</span>Keep age between 13 and 19.</li>
+                        <li><span>3</span>Submit to get the model output.</li>
+                    </ul>
+                {% endif %}
+            </div>
+        </aside>
+    </section>
 </main>
 </body>
 </html>
