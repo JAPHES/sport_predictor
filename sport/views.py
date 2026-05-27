@@ -58,8 +58,8 @@ def predictor(request):
 
         try:
             height = float(height_input)
-            if height < 3 or height > 8:
-                errors["height"] = "Height must be between 3 and 8 feet."
+            if height < 2 or height > 8:
+                errors["height"] = "Height must be between 2 and 8 feet."
         except ValueError:
             errors["height"] = "Enter a valid height."
 

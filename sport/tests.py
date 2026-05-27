@@ -74,5 +74,5 @@ class PredictorViewTests(SimpleTestCase):
         content = response.content.decode()
 
         self.assertEqual(response.status_code, 200)
-        self.assertIn("Height must be between 3 and 8 feet.", content)
+        self.assertIn("Height must be between 2 and 8 feet.", content)
         self.assertNotIn("Recommended game for Alex", content)
