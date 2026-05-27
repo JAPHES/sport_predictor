@@ -415,8 +415,8 @@
 
                 <div class="field">
                     <label for="height">Height</label>
-                    <input id="height" name="height" type="number" min="1" step="0.1" value="{{ form.height }}" placeholder="Example: 5.4" required>
-                    <p class="hint">Use the same height format used during training.</p>
+                    <input id="height" name="height" type="number" min="3" max="8" step="0.1" value="{{ form.height }}" placeholder="Example: 5.4" required>
+                    <p class="hint">Allowed range: 3 to 8 feet.</p>
                     {% if errors.height %}
                         <p class="error">{{ errors.height }}</p>
                     {% endif %}

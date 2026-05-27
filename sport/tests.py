@@ -59,3 +59,20 @@ class PredictorViewTests(SimpleTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn("Age must be between 13 and 19.", content)
         self.assertNotIn("Recommended game for Alex", content)
+
+    def test_predictor_rejects_height_outside_allowed_range(self):
+        request = self.factory.post(
+            "/predictor",
+            {
+                "name": "Alex",
+                "age": "15",
+                "height": "9",
+                "gender": "1",
+            },
+        )
+        response = predictor(request)
+        content = response.content.decode()
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Height must be between 3 and 8 feet.", content)
+        self.assertNotIn("Recommended game for Alex", content)
