@@ -4,6 +4,12 @@ Sports Predictor is a Django machine learning web app that recommends a suitable
 
 The project was developed by **Japhes Murithi**.
 
+## Live Demo
+
+```text
+https://sportpredictor-production.up.railway.app
+```
+
 ## Features
 
 - Landing page with navbar, hero section, project highlights, and footer.
