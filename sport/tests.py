@@ -1,11 +1,21 @@
 from django.test import RequestFactory, SimpleTestCase
 
-from .views import predictor
+from .views import index, predictor
 
 
 class PredictorViewTests(SimpleTestCase):
     def setUp(self):
         self.factory = RequestFactory()
+
+    def test_landing_page_loads(self):
+        request = self.factory.get("/")
+        response = index(request)
+        content = response.content.decode()
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Sports Predictor", content)
+        self.assertIn("Start prediction", content)
+        self.assertIn("developed by Japhes Murithi", content)
 
     def test_predictor_page_loads(self):
         request = self.factory.get("/predictor")
