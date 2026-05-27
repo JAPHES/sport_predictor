@@ -74,6 +74,18 @@
             color: #ffffff;
         }
 
+        .nav-action {
+            display: inline-flex;
+            min-height: 44px;
+            align-items: center;
+            justify-content: center;
+            padding: 0 16px;
+            border-radius: 6px;
+            color: #082f2a;
+            background: #5eead4;
+            font-weight: 800;
+        }
+
         main {
             width: min(1120px, calc(100% - 32px));
             margin: 0 auto;
@@ -314,6 +326,26 @@
             font-weight: 900;
         }
 
+        .site-footer {
+            background: #0f172a;
+            color: #cbd5e1;
+        }
+
+        .footer-inner {
+            width: min(1120px, calc(100% - 32px));
+            min-height: 92px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            line-height: 1.5;
+        }
+
+        .footer-inner strong {
+            color: #ffffff;
+        }
+
         @media (max-width: 860px) {
             .nav {
                 min-height: auto;
@@ -324,7 +356,12 @@
 
             .nav-links {
                 width: 100%;
-                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .nav-action {
+                width: 100%;
             }
 
             .predictor-shell,
@@ -352,6 +389,12 @@
             .panel-heading {
                 flex-direction: column;
             }
+
+            .footer-inner {
+                align-items: flex-start;
+                flex-direction: column;
+                padding: 22px 0;
+            }
         }
     </style>
 </head>
@@ -364,8 +407,9 @@
         </a>
 
         <div class="nav-links">
-            <a href="{% url 'index' %}">Home</a>
-            <a href="{% url 'predictor' %}">Predictor</a>
+            <a href="{% url 'index' %}#project">Project</a>
+            <a href="{% url 'index' %}#features">Features</a>
+            <a href="{% url 'predictor' %}" class="nav-action">Start prediction</a>
         </div>
     </nav>
 </header>
@@ -457,5 +501,12 @@
         </aside>
     </section>
 </main>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <strong>Sports Predictor</strong>
+        <span>This is a machine learning project developed by Japhes Murithi.</span>
+    </div>
+</footer>
 </body>
 </html>

@@ -25,6 +25,7 @@ class PredictorViewTests(SimpleTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn("Sports Predictor", content)
         self.assertIn("Predict sport", content)
+        self.assertIn("developed by Japhes Murithi", content)
 
     def test_predictor_returns_sport_for_valid_form(self):
         request = self.factory.post(
